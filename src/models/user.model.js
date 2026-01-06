@@ -40,23 +40,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       select: false,
     },
-
-    avatar: {
-      type: String,
-      default: "",
-    //   trim: true,
-    },
-
-    coverImage: {
-      type: String,
-    //   default: "",
-    //   trim: true,
-    },
-
-    watchHistory: [{
-      type: Schema.Types.ObjectId,
-      ref: "video"
-    }],
     refreshToken: {
       type: String,
  
@@ -65,12 +48,12 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 // Hash password before saving
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
 
   this.password = await bcrypt.hash(this.password, 10);
-  next();
 });
+
 // Compare entered password with hashed password
 userSchema.methods.passwordCorrect = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);

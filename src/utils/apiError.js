@@ -1,10 +1,9 @@
 export class ApiError extends Error {
-  constructor(statusCode, message, errors = [], stack = "",data,success) {
+  constructor(statusCode, message, errors = [], stack = "") {
     super(message);
-    this.statusCode = statusCode;
-    this.message = message;
+    this.statusCode = statusCode || 500;
+    this.message = message || "Internal Server Error";
     this.data = null;
-    this.success = false
     this.success = false;
     this.errors = errors;
 

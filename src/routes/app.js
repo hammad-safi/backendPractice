@@ -123,14 +123,10 @@ import purchaseRoutes from "./routes/purchase.routes.js";
 import salesRoutes from "./routes/sales.routes.js";
 import supplierRoutes from "./routes/supplier.routes.js";
 import notificationRoutes from './routes/notification.routes.js';
-
-import "./jobs/notification.jobs.js"; // Import cron jobs
+import "../jobs/notification.jobs.js"; // Import cron jobs
 
 import { errorHandler } from "./utils/errorHandler.js";
 import profileRoutes from './routes/profile.routes.js';
-import reportRoutes from './routes/reports.routes.js';
-
-// Add this with other route uses
 
 
 const app = express();
@@ -206,9 +202,8 @@ app.use("/api/v1/purchases", purchaseRoutes);
 app.use("/api/v1/sales", salesRoutes);
 app.use("/api/v1/suppliers", supplierRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
-app.use("/api/v1/notifications", notificationRoutes);
-app.use("/api/v1/reports", reportRoutes);
 // Add after other routes
+app.use('/api/v1/notifications', notificationRoutes);
 app.use('/api/profile', profileRoutes);
 /* =======================
    ❌ 404 HANDLER
